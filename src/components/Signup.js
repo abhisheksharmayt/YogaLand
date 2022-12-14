@@ -32,13 +32,21 @@ const Signup = () => {
                     <form className='w-full py-5 text-gray-600 flex flex-col items-center' action="">
                         <div className='w-full bg-white mb-5 max-w-sm'>
                             <label className='block font-medium pb-3' htmlFor="name">Name: </label>
-                            <input className='w-full max-w-sm border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="text" placeholder='Rohit Kumar' name="name"/>
+                            <input className='w-full max-w-sm border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="text" placeholder='Abhishek Sharma' name="name"/>
                         </div>
                         <div className='w-full bg-white mb-5 max-w-sm'>
-                            <label className='block font-medium pb-3' htmlFor="name">Email: </label>
-                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="email" placeholder='something@mail.com' name="email"/>
+                            <label className='block font-medium pb-3' htmlFor="email">Email: </label>
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email"/>
                         </div>
-                        <div className="flex flex-col w-full max-w-sm sm:flex-row">
+                        <div className='w-full bg-white mb-5 max-w-sm'>
+                            <label className='block font-medium pb-3' htmlFor="password">Password: </label>
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" />
+                        </div>
+                        <div className='w-full bg-white mb-5 max-w-sm'>
+                            <label className='block font-medium pb-3' htmlFor="dob">DOB:</label>
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="dob" type="date" max={`${year - 18}-${month}-${day}`} min={`${year - 65}-${month}-${day}`} name="dob" />
+                        </div>
+                        {/* <div className="flex flex-col w-full max-w-sm sm:flex-row">
                             <div className='w-full bg-white mb-5 max-w-sm sm:w-1/3'>
                                 <label className='block font-medium pb-3' htmlFor="name">Batch: </label>
                                 <select className='drop-shadow-md border-none rounded-md focus:outline-0' name="batch" id="batch">
@@ -52,12 +60,12 @@ const Signup = () => {
                                 <label className='block font-medium pb-3' htmlFor="name">DOB:</label>
                                 <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="date" max={`${year - 18}-${month}-${day}`} min={`${year - 65}-${month}-${day}`} name="dob"/>
                             </div>
-                        </div>
+                        </div> */}
                         <Link className='w-full max-w-sm' to='/login'>
                             <p className='text-gray-500 text-sm mb-5'>Already a member? <span className='text-purple-500 underline decoration-1 hover:no-underline'>Login</span></p>
                         </Link>
                         <button className='w-full max-w-sm text-center rounded-lg bg-purple-500 hover:bg-purple-600 my-auto text-white py-3 font-medium text-lg transition-all ease-in-out'>
-                            Pay ₹500
+                            Sign Up
                         </button>
                     </form>
                 </div>
