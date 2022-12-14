@@ -26,8 +26,12 @@ const Login = () => {
                   <h1 className='text-xl md:text-3xl font-medium'>Welcome to YOGALAND!</h1>
                   <form className='w-full h-full py-5 text-gray-600 flex flex-col items-center justify-center' action="">
                       <div className='w-full bg-white mb-5 max-w-sm'>
-                          <label className='block font-medium pb-3' htmlFor="name">Email: </label>
-                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="email" placeholder='something@mail.com' name="email" />
+                          <label className='block font-medium pb-3' htmlFor="email">Email: </label>
+                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email" />
+                      </div>
+                      <div className='w-full bg-white mb-5 max-w-sm'>
+                          <label className='block font-medium pb-3' htmlFor="password">Password: </label>
+                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" />
                       </div>
                       <Link className='w-full max-w-sm' to='/signup'>
                           <p className='text-gray-500 text-sm mb-5'>Not a member? <span className='text-purple-500 underline decoration-1 hover:no-underline'>SignUp</span>
