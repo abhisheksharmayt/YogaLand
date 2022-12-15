@@ -18,11 +18,11 @@ const data = {
             month: 'Feb',
             timing: '5-6PM'
         },
-        {
-            id: '3',
-            month: 'Mar',
-            timing: '6-7AM',
-        }
+        // {
+        //     id: '3',
+        //     month: 'Mar',
+        //     timing: '6-7AM',
+        // }
     ]
 };
 
