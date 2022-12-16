@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/api';
 
 const useFetchGet = (url, dependency1=true, dependency2=true) => {
     const [data, setData] = useState({});
@@ -7,7 +8,7 @@ const useFetchGet = (url, dependency1=true, dependency2=true) => {
     useEffect(() => {
         const dataFetch = async () => {
             try {
-                const resp = await fetch(url,
+                const resp = await fetch(`${baseUrl}${url}`,
                     {
                         method: 'GET',
                         headers: {

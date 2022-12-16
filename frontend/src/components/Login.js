@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import loadingSvg from '../images/loading.svg'
+const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/api';
 
 const Login = () => {
     const [loading, setLoading] = useState(true);
@@ -25,7 +26,7 @@ const Login = () => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch('/api/user/login', {
+            let res = await fetch(`${baseUrl}/api/user/login`, {
                 method: "POST",
                 body: JSON.stringify(userData),
                 withCredentials: true,

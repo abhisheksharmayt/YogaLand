@@ -3,7 +3,7 @@ import loadingSvg from '../images/loading.svg'
 import loadingGif from '../images/loading.gif'
 import { Link, useNavigate } from 'react-router-dom'
 import useFetchPost from '../hooks/useFetchPost'
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/api';
 
 const Signup = () => {
     const date = new Date();
@@ -25,7 +25,7 @@ const Signup = () => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch(`api/user/register`, {
+            let res = await fetch(`${baseUrl}/api/user/register`, {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {

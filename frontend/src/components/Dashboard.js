@@ -3,7 +3,7 @@ import useFetchGet from '../hooks/useFetchGet';
 import loadingSvg from '../images/loading.svg'
 import EditBatch from './EditBatch';
 import NewBatch from './NewBatch';
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL || 'http://localhost:4000/api';
 const totalBatches = ['December', 'January', 'Feburary', 'March', 'April', 'May'];
 const allMonths = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -12,8 +12,8 @@ const Dashboard = () => {
     const [showJoin, setShowJoin] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [editInfo, setEditInfo] = useState({batchId: -1, month: "", timing: ""});
-    const { data, loading } = useFetchGet(`/api/user/me`);
-    const response2 = useFetchGet(`/api/batch`, showJoin, showEdit);
+    const { data, loading } = useFetchGet(`${baseUrl}/api/user/me`);
+    const response2 = useFetchGet(`${baseUrl}/api/batch`, showJoin, showEdit);
     const openJoinMenu = () => { setShowJoin(true) };
     const openEditMenu = () => { setShowEdit(true) };
     const closeJoinMenu = () => { setShowJoin(false) };
