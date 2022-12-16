@@ -14,7 +14,7 @@ const NewBatch = ({ closeJoinMenu, batches, monthsLeft }) => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch('https://flexmoney-frontend-production.up.railway.app/api/batch/join', {
+            let res = await fetch('/api/batch/join', {
                 method: "POST",
                 body: JSON.stringify(userData),
                 credentials: 'include',

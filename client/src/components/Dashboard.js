@@ -12,8 +12,8 @@ const Dashboard = () => {
     const [showJoin, setShowJoin] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [editInfo, setEditInfo] = useState({batchId: -1, month: "", timing: ""});
-    const { data, loading } = useFetchGet(`https://flexmoney-frontend-production.up.railway.app/api/user/me`);
-    const response2 = useFetchGet(`https://flexmoney-frontend-production.up.railway.app/api/batch`, showJoin, showEdit);
+    const { data, loading } = useFetchGet(`/api/user/me`);
+    const response2 = useFetchGet(`/api/batch`, showJoin, showEdit);
     const openJoinMenu = () => { setShowJoin(true) };
     const openEditMenu = () => { setShowEdit(true) };
     const closeJoinMenu = () => { setShowJoin(false) };
