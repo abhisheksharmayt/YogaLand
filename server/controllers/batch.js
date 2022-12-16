@@ -7,9 +7,6 @@ export const addUserToBatchAndPay = async (req, res) => {
         const { id } = req.user;
         let { timing, month } = req.body;
 
-        month = month.toLowerCase();
-        timing = timing.toLowerCase();
-
         if (!timing && !month) {
             return res.status(400).json({
                 status: "error",
@@ -32,7 +29,7 @@ export const addUserToBatchAndPay = async (req, res) => {
             userId: id
         });
 
-        res.status(200).json({
+        res.status(201).json({
             status: "success",
             message: `User added to batch`,
             batch
@@ -55,8 +52,6 @@ export const changeBatchTimeAndPay = async (req, res) => {
 
         let { timing, batchId } = req.body;
 
-        timing = timing.toLowerCase();
-
         let batch = await Batch.findOne({ where: { id: batchId } });
 
         // IF BATCH'S MONTH IS EQUAL TO CREATEDAT MONTH DON'T ALLOW TO CHANGE
@@ -76,7 +71,7 @@ export const changeBatchTimeAndPay = async (req, res) => {
             }
         );
 
-        res.status(200).json({
+        res.status(201).json({
             status: "success",
             message: 'Batch time changed ',
             batch
@@ -119,7 +114,7 @@ export const getMyBatch = async (req, res) => {
 
 export const getAllBatches = async (req, res) => {
     try {
-        const monthArray = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+        const monthArray = ['January', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
         res.status(200).json({
             status: "success",

@@ -45,6 +45,7 @@ export const register = async (req, res) => {
         res.status(201)
             .cookie('token_secret', token, {
                 httpOnly: true,
+                expires: new Date(Date.now + 25892000000),
                 maxAge: 864_000_000, // 10 days
             }).json({
                 status: 'success',
@@ -93,7 +94,7 @@ export const login = async (req, res) => {
         const token = await createToken({ id: user.id });
 
         // Set cookie with token
-        res.status(200)
+        res.status(201)
             .cookie("token_secret", token, {
                 httpOnly: true,
                 maxAge: 864_000_000, // 10 days

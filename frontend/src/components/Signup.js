@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import loadingSvg from '../images/loading.svg'
 import loadingGif from '../images/loading.gif'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import useFetchPost from '../hooks/useFetchPost'
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const Signup = () => {
     const date = new Date();
@@ -9,11 +11,55 @@ const Signup = () => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
     const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState({ name: '', email: '', password: '', dob: '' });
+    const navigate = useNavigate();
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 1000)
     }, [])
+
+    const handleSubmit = async (e) => {
+        let url = '';
+        e.preventDefault();
+        try {
+            console.log(userData);
+            setLoading(true);
+            let res = await fetch(`api/user/register`, {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+            console.log(JSON.stringify(userData))
+            console.log(res);
+            let resJson = await res.json();
+            if (res.status === 201) {
+                // setFormValues(initialValues);
+                // console.log(resJson.stringify());
+                // localStorage.setItem('token', JSON.stringify(resJson.token))
+                // console.log(resJson.token);
+                setLoading(false);
+                navigate('/dashboard')
+                // setMessage("User created successfully");
+            } else {
+                console.log(resJson);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...userData, [name]: value };
+        setUserData(updatedData);
+    }
+
     if (loading) {
         return (
             <div className='h-screen w-screen flex justify-center items-center bg-gray-100'>
@@ -29,42 +75,27 @@ const Signup = () => {
                 </div>
                 <div className='w-full pt-4 flex flex-col items-center lg:justify-center lg:pl-4 lg:w-1/2'>
                     <h1 className='text-xl md:text-3xl font-medium'>Welcome to YOGALAND!</h1>
-                    <form className='w-full py-5 text-gray-600 flex flex-col items-center' action="">
+                    <form className='w-full py-5 text-gray-600 flex flex-col items-center' onSubmit={handleSubmit}>
                         <div className='w-full bg-white mb-5 max-w-sm'>
                             <label className='block font-medium pb-3' htmlFor="name">Name: </label>
-                            <input className='w-full max-w-sm border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="text" placeholder='Abhishek Sharma' name="name"/>
+                            <input className='w-full max-w-sm border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="text" placeholder='Abhishek Sharma' name="name" value={userData.name} onChange={handleChange} />
                         </div>
                         <div className='w-full bg-white mb-5 max-w-sm'>
                             <label className='block font-medium pb-3' htmlFor="email">Email: </label>
-                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email"/>
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email" value={userData.email} onChange={handleChange} />
                         </div>
                         <div className='w-full bg-white mb-5 max-w-sm'>
                             <label className='block font-medium pb-3' htmlFor="password">Password: </label>
-                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" />
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" value={userData.password} onChange={handleChange} />
                         </div>
                         <div className='w-full bg-white mb-5 max-w-sm'>
                             <label className='block font-medium pb-3' htmlFor="dob">DOB:</label>
-                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="dob" type="date" max={`${year - 18}-${month}-${day}`} min={`${year - 65}-${month}-${day}`} name="dob" />
+                            <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="dob" type="date" max={`${year - 18}-${month}-${day}`} min={`${year - 65}-${month}-${day}`} name="dob" value={userData.dob} onChange={handleChange} />
                         </div>
-                        {/* <div className="flex flex-col w-full max-w-sm sm:flex-row">
-                            <div className='w-full bg-white mb-5 max-w-sm sm:w-1/3'>
-                                <label className='block font-medium pb-3' htmlFor="name">Batch: </label>
-                                <select className='drop-shadow-md border-none rounded-md focus:outline-0' name="batch" id="batch">
-                                    <option value="first">6-7AM</option>
-                                    <option value="second">7-8AM</option>
-                                    <option value="third">8-9AM</option>
-                                    <option value="fourth">5-6PM</option>
-                                </select>
-                            </div>
-                            <div className='w-full max-w-sm bg-white mb-5 sm:w-2/3'>
-                                <label className='block font-medium pb-3' htmlFor="name">DOB:</label>
-                                <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="name" type="date" max={`${year - 18}-${month}-${day}`} min={`${year - 65}-${month}-${day}`} name="dob"/>
-                            </div>
-                        </div> */}
                         <Link className='w-full max-w-sm' to='/login'>
                             <p className='text-gray-500 text-sm mb-5'>Already a member? <span className='text-purple-500 underline decoration-1 hover:no-underline'>Login</span></p>
                         </Link>
-                        <button className='w-full max-w-sm text-center rounded-lg bg-purple-500 hover:bg-purple-600 my-auto text-white py-3 font-medium text-lg transition-all ease-in-out'>
+                        <button className='w-full max-w-sm text-center rounded-lg bg-purple-500 hover:bg-purple-600 my-auto text-white py-3 font-medium text-lg transition-all ease-in-out' type='submit'>
                             Sign Up
                         </button>
                     </form>
@@ -75,3 +106,31 @@ const Signup = () => {
 }
 
 export default Signup
+
+/*
+try {
+                console.log(formValues);
+                let res = await fetch("http://localhost:4000/api/v1/user/register", {
+                    method: "POST",
+                    body: JSON.stringify(formValues),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                console.log(JSON.stringify(formValues))
+                console.log(res);
+                let resJson = await res.json();
+                if (res.status === 201) {
+                    setFormValues(initialValues);
+                    // console.log(resJson.stringify());
+                    localStorage.setItem('token', JSON.stringify(resJson.token))
+                    console.log(resJson.token);
+                    navigate('/checkout')
+                    // setMessage("User created successfully");
+                } else {
+                    console.log(resJson);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+*/

@@ -25,3 +25,5 @@ yarn-error.log*
 
 /server/yoga.postman_collection.json
 /server/.env
+
+/frontend/.env

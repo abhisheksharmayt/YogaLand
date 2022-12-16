@@ -1,14 +1,61 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import loadingSvg from '../images/loading.svg'
 
 const Login = () => {
     const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState({email: '', password: ''});
+    const navigate = useNavigate();
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 1000)
+        // console.log(document.cook);
     }, [])
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...userData, [name]: value };
+        setUserData(updatedData);
+    }
+
+    const handleSubmit = async (e) => {
+        let url = '';
+        e.preventDefault();
+        try {
+            console.log(userData);
+            setLoading(true);
+            let res = await fetch('/api/user/login', {
+                method: "POST",
+                body: JSON.stringify(userData),
+                withCredentials: true,
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // credentials: 'same-origin',
+            });
+            console.log(JSON.stringify(userData))
+            console.log(res);
+            let resJson = await res.json();
+            if (res.status === 201) {
+                // setFormValues(initialValues);
+                // console.log(resJson.stringify());
+                // localStorage.setItem('token', JSON.stringify(resJson.token))
+                // console.log(resJson.token);
+                setLoading(false);
+                navigate('/dashboard')
+                // setMessage("User created successfully");
+            } else {
+                setLoading(false);
+                console.log(resJson);
+            }
+        } catch (err) {
+            setLoading(false);
+            console.log(err);
+        }
+    }
+
     if (loading) {
         return (
             <div className='h-screen w-screen flex justify-center items-center bg-gray-100'>
@@ -24,14 +71,14 @@ const Login = () => {
               </div>
               <div className='w-full pt-6 flex flex-col lg:mx-10 items-center lg:justify-center lg:pl-4 lg:w-1/2 h-fit'>
                   <h1 className='text-xl md:text-3xl font-medium'>Welcome to YOGALAND!</h1>
-                  <form className='w-full h-full py-5 text-gray-600 flex flex-col items-center justify-center' action="">
+                  <form className='w-full h-full py-5 text-gray-600 flex flex-col items-center justify-center' method="POST" onSubmit={handleSubmit}>
                       <div className='w-full bg-white mb-5 max-w-sm'>
                           <label className='block font-medium pb-3' htmlFor="email">Email: </label>
-                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email" />
+                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="email" type="email" placeholder='something@mail.com' name="email" value={userData.email} onChange={handleChange}/>
                       </div>
                       <div className='w-full bg-white mb-5 max-w-sm'>
                           <label className='block font-medium pb-3' htmlFor="password">Password: </label>
-                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" />
+                          <input className='w-full border-none rounded-lg overflow:hidden drop-shadow-md' id="password" type="password" placeholder='**********' name="password" value={userData.password} onChange={handleChange}/>
                       </div>
                       <Link className='w-full max-w-sm' to='/signup'>
                           <p className='text-gray-500 text-sm mb-5'>Not a member? <span className='text-purple-500 underline decoration-1 hover:no-underline'>SignUp</span>
