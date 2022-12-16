@@ -23,7 +23,7 @@ const Signup = () => {
         let url = '';
         e.preventDefault();
         try {
-            console.log(userData);
+            // console.log(userData);
             setLoading(true);
             let res = await fetch(`api/user/register`, {
                 method: "POST",
@@ -34,8 +34,8 @@ const Signup = () => {
                 },
                 credentials: 'include',
             });
-            console.log(JSON.stringify(userData))
-            console.log(res);
+            // console.log(JSON.stringify(userData))
+            // console.log(res);
             let resJson = await res.json();
             if (res.status === 201) {
                 // setFormValues(initialValues);
@@ -46,7 +46,7 @@ const Signup = () => {
                 navigate('/dashboard')
                 // setMessage("User created successfully");
             } else {
-                console.log(resJson);
+                // console.log(resJson);
             }
         } catch (err) {
             console.log(err);

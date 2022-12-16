@@ -23,7 +23,7 @@ const Login = () => {
         let url = '';
         e.preventDefault();
         try {
-            console.log(userData);
+            // console.log(userData);
             setLoading(true);
             let res = await fetch('/api/user/login', {
                 method: "POST",
@@ -35,8 +35,8 @@ const Login = () => {
                 },
                 // credentials: 'same-origin',
             });
-            console.log(JSON.stringify(userData))
-            console.log(res);
+            // console.log(JSON.stringify(userData))
+            // console.log(res);
             let resJson = await res.json();
             if (res.status === 201) {
                 // setFormValues(initialValues);
@@ -48,11 +48,11 @@ const Login = () => {
                 // setMessage("User created successfully");
             } else {
                 setLoading(false);
-                console.log(resJson);
+                // console.log(resJson);
             }
         } catch (err) {
             setLoading(false);
-            console.log(err);
+            // console.log(err);
         }
     }
 

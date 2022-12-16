@@ -10,9 +10,9 @@ const NewBatch = ({ closeJoinMenu, batches, monthsLeft }) => {
     
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(userData);
+        // console.log(userData);
         try {
-            console.log(userData);
+            // console.log(userData);
             setLoading(true);
             let res = await fetch('/api/batch/join', {
                 method: "POST",
@@ -23,19 +23,19 @@ const NewBatch = ({ closeJoinMenu, batches, monthsLeft }) => {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log(JSON.stringify(userData))
-            console.log(res);
+            // console.log(JSON.stringify(userData))
+            // console.log(res);
             let resJson = await res.json();
             if (res.status === 201) {
                 setLoading(false);
                 closeJoinMenu()
             } else {
                 setLoading(false);
-                console.log(resJson);
+                // console.log(resJson);
             }
         } catch (err) {
             setLoading(false);
-            console.log(err);
+            // console.log(err);
         }
     }
     const handleChange = (e) => {
