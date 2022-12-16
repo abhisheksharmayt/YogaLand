@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
     origin: [
         'http://localhost:3000',
-        'https://yogaland-flexmoney.vercel.app/'
+        'https://yogaland-flexmoney.vercel.app'
     ],
     credentials: true,
 }));
