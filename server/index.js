@@ -8,13 +8,7 @@ import userRoutes from './routes/user.js';
 import batchRoutes from './routes/batch.js';
 const app = express();
 
-app.use(cors({
-    origin: [
-        'http://localhost:3000',
-        'https://yogaland-flexmoney.vercel.app'
-    ],
-    credentials: true,
-}));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
