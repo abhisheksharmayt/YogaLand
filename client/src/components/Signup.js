@@ -25,7 +25,7 @@ const Signup = () => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch(`/api/user/register`, {
+            let res = await fetch(`https://flexmoney-frontend-production.up.railway.app/api/user/register`, {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {

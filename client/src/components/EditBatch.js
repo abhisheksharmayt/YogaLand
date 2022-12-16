@@ -13,7 +13,7 @@ const EditBatch = ({ closeEditMenu, editInfo }) => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch('/api/batch/change', {
+            let res = await fetch('https://flexmoney-frontend-production.up.railway.app/api/batch/change', {
                 method: "PATCH",
                 body: JSON.stringify(userData),
                 credentials: 'include',
