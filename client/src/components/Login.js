@@ -26,7 +26,7 @@ const Login = () => {
         try {
             // console.log(userData);
             setLoading(true);
-            let res = await fetch(`${baseUrl}/api/user/login`, {
+            let res = await fetch(`/api/user/login`, {
                 method: "POST",
                 body: JSON.stringify(userData),
                 withCredentials: true,
