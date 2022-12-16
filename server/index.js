@@ -1,3 +1,5 @@
+// import { createRequire } from 'module';
+// const require = createRequire(import.meta.url);
 import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -6,7 +8,13 @@ import cors from 'cors';
 import { sequelize } from './db/connect.js';
 import userRoutes from './routes/user.js';
 import batchRoutes from './routes/batch.js';
+import path from 'path'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(cors({
     origin: [
@@ -23,6 +31,11 @@ app.use('/api/user', userRoutes);
 app.use('/api/batch', batchRoutes);
 
 const port = process.env.PORT || 4000;
+
+app.get('/', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
 
 sequelize.sync({ force: false }).then(() => {
     console.log('Database connected');

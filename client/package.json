@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "./", 
   "proxy" : "https://flexmoney-frontend-production.up.railway.app",
   "private": true,
   "dependencies": {
