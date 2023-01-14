@@ -52,3 +52,12 @@ This is a simple Yoga Class Booking App. In this project I've used ReactJS for t
 | POST      | /batch/join       | Add user to a batch with timing and pay the amount
 | PATCH     | /batch/Change     | Change the Batch and Pay the amount
 | GET       | /batch/all        | Get all active batches
+
+## Screenshots
+<img width="1440" alt="main-page" src="https://user-images.githubusercontent.com/72799681/212475692-02780479-65bd-4283-b605-14e69a92971f.png">
+<img width="1440" alt="login-page" src="https://user-images.githubusercontent.com/72799681/212475721-aafb99d7-14b0-487c-a703-9f7b8d1fa83d.png">
+<img width="1440" alt="signup-page" src="https://user-images.githubusercontent.com/72799681/212475726-458c0866-4d7c-4a9a-a385-fcde515dfce3.png">
+<img width="1440" alt="dashboard" src="https://user-images.githubusercontent.com/72799681/212475727-219fc817-0855-48ee-811b-5fca70c5aa4c.png">
+<img width="1440" alt="join-modal" src="https://user-images.githubusercontent.com/72799681/212475728-06872360-9a36-4075-9073-315383ab3291.png">
+
+
